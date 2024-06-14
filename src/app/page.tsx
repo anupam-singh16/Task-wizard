@@ -7,7 +7,7 @@ const Logo = () => {
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleClick = (e: { clientX: number; clientY: number }) => {
       const x = e.clientX - 50; // Adjusting for logo center
       const y = e.clientY - 50; // Adjusting for logo center
       const deltaX = x - position.x;
