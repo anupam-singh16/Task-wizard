@@ -44,6 +44,7 @@ const Logo = () => {
         src="wizaart-img.56787174.gif"
         alt="Logo"
       />
+      
     </div>
   );
 };
