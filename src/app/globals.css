@@ -29,7 +29,7 @@ body {
   position: absolute;
   width: 50px;
   height: 50px;
-  transition: transform 8s ease; /* Change the duration from 1s to 2s */
+  transition: transform 8s ease; 
   display: flex;
   justify-content: center;
   align-items: center;

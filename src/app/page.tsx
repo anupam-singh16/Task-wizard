@@ -1,38 +1,49 @@
 // components/Logo.js
 "use client";
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 
 const Logo = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState(0);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [angle, setAngle] = useState(0);
+  const [flip, setFlip] = useState(false);
+  console.log(flip, "flip");
+
+  const handleClick = (e: { clientX: number; clientY: number }) => {
+    const newX = e.clientX - 25;
+    const newY = e.clientY - 25;
+
+   
+    const dx = newX - position.x;
+    const dy = newY - position.y;
+    const newAngle = Math.atan2(dy, dx) * (10 / Math.PI); 
+
+    setAngle(newAngle);
+    setPosition({ x: newX, y: newY });
+
+    const isLeftSide = e.clientX < position.x;
+    setFlip(isLeftSide);
+  
+  };
 
   useEffect(() => {
-    const handleClick = (e: { clientX: number; clientY: number }) => {
-      const x = e.clientX - 50; // Adjusting for logo center
-      const y = e.clientY - 50; // Adjusting for logo center
-      const deltaX = x - position.x;
-      const deltaY = y - position.y;
-      const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-
-      setPosition({ x, y });
-      setRotation(angle);
-    };
-
     window.addEventListener("click", handleClick);
-
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
+    return () => window.removeEventListener("click", handleClick);
   }, [position]);
 
   return (
     <div
       className="logo"
       style={{
-        transform: `translate(${position.x}px, ${position.y}px) rotate(${rotation}deg)`,
+        transform: `translate(${position.x}px, ${position.y}px) rotate(${angle}deg)`,
       }}
     >
-      <img src="wizaart-img.56787174.gif" alt="Logo" className="image" />
+      <img
+        style={{ transform: !flip ? "scaleX(-1)" : "scaleX(1)" }}
+        width={90}
+        src="wizaart-img.56787174.gif"
+        alt="Logo"
+      />
     </div>
   );
 };
