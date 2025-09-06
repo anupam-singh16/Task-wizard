@@ -13,17 +13,15 @@ const Logo = () => {
     const newX = e.clientX - 25;
     const newY = e.clientY - 25;
 
-   
     const dx = newX - position.x;
     const dy = newY - position.y;
-    const newAngle = Math.atan2(dy, dx) * (10 / Math.PI); 
+    const newAngle = Math.atan2(dy, dx) * (10 / Math.PI);
 
     setAngle(newAngle);
     setPosition({ x: newX, y: newY });
 
     const isLeftSide = e.clientX < position.x;
     setFlip(isLeftSide);
-  
   };
 
   useEffect(() => {
@@ -44,7 +42,6 @@ const Logo = () => {
         src="wizaart-img.56787174.gif"
         alt="Logo"
       />
-      
     </div>
   );
 };
